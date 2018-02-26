@@ -1,0 +1,18 @@
+@(books: List[Book], isLogged: Boolean)
+
+@layout("All Books", isLogged) {
+    <h1>All Books</h1>
+
+    @for(book <- books){
+        <a class="btn btn-link" href="@routes.BooksController.show(book.id)"> @book.title</a>
+        <p>Price: @book.price</p>
+        <p>Author: @book.author</p>
+    }
+
+    @* //Comentado pero dejado como ejemplo
+    <a class="btn btn-success" href="@routes.BooksController.create()">
+        <i class="glyphicon glyphicon-plus-sign"></i>
+        Create Book
+    </a>
+    *@
+}

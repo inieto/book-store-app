@@ -1,0 +1,19 @@
+@(isLogged: Boolean, book: Book)
+@import helper._
+
+@layout(book.title, isLogged) {
+    <h2>@book.title</h2>
+
+    <p>Price: $@book.price</p>
+    <p>Author: @book.author</p>
+
+    <a class="btn btn-primary" href="@routes.BooksController.edit(book.id)">Edit</a>
+
+    @*<a class="btn btn-danger" href="@routes.BooksController.destroy(book.id)">Delete</a>*@
+
+    <button id="deleteBookBtn" class="btn btn-danger"
+            data-csrf-name="@helper.CSRF.getToken.name"
+            data-csrf-value="@helper.CSRF.getToken.value"
+            data-delete-url="@routes.BooksController.destroy(book.id)"
+            data-redirect-url="@routes.HomeController.index()">Delete</button>
+}

@@ -1,0 +1,16 @@
+@(bookForm: play.data.Form[Book], isLogged: Boolean)
+@import helper._
+@import views.html.partials._booksFormFields
+
+@layout("Edit Book", isLogged) {
+
+    <h1>Edit Book</h1>
+
+    @helper.form(action = routes.BooksController.update(), 'id->"bookUpdateForm"){  @* String id = "bookUpdateForm" (CONST) *@
+        @_booksFormFields(bookForm)
+    }
+
+    <button id="editBookBtn" class="btn btn-primary"
+            data-form-id="bookUpdateForm"
+            data-redirect-url="@routes.BooksController.edit(bookForm.get().id)">Edit Book</button>
+}

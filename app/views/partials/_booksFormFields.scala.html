@@ -1,0 +1,7 @@
+@(bookForm: play.data.Form[Book])
+
+@helper.CSRF.formField
+@helper.inputText(bookForm("id"), 'class -> "form-control")
+@helper.inputText(bookForm("title"), 'class -> "form-control")
+@helper.inputText(bookForm("price"), 'class -> "form-control")
+@helper.inputText(bookForm("author"),'class -> "form-control")
