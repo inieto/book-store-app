@@ -1,11 +1,11 @@
 package filters;
 
+import com.google.inject.Inject;
 import org.pac4j.play.filters.SecurityFilter;
 import play.http.HttpFilters;
 import play.mvc.EssentialAction;
 import play.mvc.EssentialFilter;
 
-import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 

@@ -1,12 +1,10 @@
 package controllers;
 
-import controllers.security.CredentialsAction;
 import models.Book;
 import org.pac4j.play.java.Secure;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Result;
-import play.mvc.With;
 import views.html.books.create;
 import views.html.books.edit;
 import views.html.books.index;
@@ -16,11 +14,10 @@ import views.html.errors._404;
 import javax.inject.Inject;
 import java.util.List;
 
-@With(CredentialsAction.class)
 public class BooksController extends GenericController {
 
     @Inject
-    FormFactory formFactory;
+    private FormFactory formFactory;
 
     //for all books
     public Result index() {

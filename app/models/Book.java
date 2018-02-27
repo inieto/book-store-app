@@ -1,8 +1,5 @@
 package models;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import io.ebean.Finder;
 import io.ebean.Model;
 import play.data.validation.Constraints;

@@ -1,9 +1,10 @@
 package modules;
 
+import be.objectify.deadbolt.java.cache.HandlerCache;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import controllers.LoginController;
 import controllers.security.SecurityHttpActionAdapter;
+import controllers.security.UserAuthenticator;
 import org.pac4j.core.authorization.authorizer.RequireAnyRoleAuthorizer;
 import org.pac4j.core.client.Clients;
 import org.pac4j.core.client.direct.AnonymousClient;
@@ -12,12 +13,10 @@ import org.pac4j.http.client.indirect.FormClient;
 import org.pac4j.play.CallbackController;
 import org.pac4j.play.LogoutController;
 import org.pac4j.play.deadbolt2.Pac4jHandlerCache;
-import be.objectify.deadbolt.java.cache.HandlerCache;
 import org.pac4j.play.deadbolt2.Pac4jRoleHandler;
 import org.pac4j.play.store.PlayCacheSessionStore;
 import org.pac4j.play.store.PlaySessionStore;
 import play.Environment;
-import play.cache.SyncCacheApi;
 
 public class SecurityModule extends AbstractModule {
 
@@ -36,7 +35,6 @@ public class SecurityModule extends AbstractModule {
     protected void configure() {
         bind(HandlerCache.class).to(Pac4jHandlerCache.class);
         bind(Pac4jRoleHandler.class).to(MyPac4jRoleHandler.class);
-        final PlayCacheSessionStore playCacheSessionStore = new PlayCacheSessionStore(getProvider(SyncCacheApi.class));
         bind(PlaySessionStore.class).to(PlayCacheSessionStore.class);
 
         // callback
@@ -52,8 +50,8 @@ public class SecurityModule extends AbstractModule {
     }
 
     @Provides
-    protected FormClient provideFormClient() {
-        return new FormClient(baseUrl + "/login", new LoginController());
+    protected FormClient provideFormClient(UserAuthenticator authenticator) {
+        return new FormClient(baseUrl + "/login", authenticator);
     }
 
     @Provides
